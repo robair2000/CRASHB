@@ -1,0 +1,31 @@
+services:
+  - type: worker
+    name: crash-paper-bot
+    runtime: python
+    plan: starter
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    disk:
+      name: crash-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: MODE
+        value: paper
+      - key: DATA_DIR
+        value: /data
+      - key: UNIVERSE_SIZE
+        value: "50"
+      - key: CRASH_Z
+        value: "4.0"
+      - key: HOLD_HOURS
+        value: "24"
+      - key: STOP_PCT
+        value: "0.15"
+      - key: POSITION_FRAC
+        value: "0.075"
+      - key: START_CASH
+        value: "1000"
